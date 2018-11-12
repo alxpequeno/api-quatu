@@ -21,6 +21,27 @@ create table PROVEEDOR(
     foreign key (departamento_id) 		references DEPARTAMENTO (id)
 );
 
+create table CATEGORIA(
+	codigo int auto_increment primary key,
+    descripcion varchar(100) not null
+);
+
+create table PRODUCTO(
+	codigo int auto_increment primary key,
+    nombre varchar(200) not null,
+    descripcion varchar(300) not null,
+    precio_min double not null,
+    precio_max double not null,
+    medida varchar(20) not null,
+    categoria_codigo int not null,
+    region varchar(500) not null,
+    resumen varchar(1000) not null,
+    proveedor_id int not null,
+    
+    foreign key (categoria_codigo) references CATEGORIA(codigo),
+    foreign key (proveedor_id) references PROVEEDOR(id)
+);
+
 insert into DEPARTAMENTO values(null,"Amazonas");
 insert into DEPARTAMENTO values(null,"Ancash");
 insert into DEPARTAMENTO values(null,"Apurimac");
@@ -50,4 +71,7 @@ insert into DEPARTAMENTO values(null,"Ucayali");
 insert into PROVEEDOR values (null,"Supermercados Peruanos","20396678903","Pedro Oyeda","45683634","pedrito@esgay.com","Av. El Golf calle 1 Mz23 Lote 3 Asentamiento Humano los Invasores de la Molina",1,"kawasaki");
 insert into PROVEEDOR values (null,"RIMAC Seguros","121323123","Pedro Oyeda","45683634","pedrito@esgay.com","Av. El Golf calle 1 Mz23 Lote 3 Asentamiento Humano los Invasores de la Molina",1,"kawasaki");
 
+insert into CATEGORIA values (null, "Aves y Carnes");
+
 select * from PROVEEDOR;
+select * from CATEGORIA;
