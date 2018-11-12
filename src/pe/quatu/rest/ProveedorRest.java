@@ -23,6 +23,47 @@ public class ProveedorRest {
 
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/actualizar")
+	public void actualizarProveedor(@FormParam("p_id") int id, @FormParam("p_empresa") String empresa,
+			@FormParam("p_ruc") String ruc, @FormParam("p_contacto") String contacto, @FormParam("p_dni") String dni,
+			@FormParam("p_correo") String correo, @FormParam("p_direccion") String direccion,
+			@FormParam("p_departamento") int departamento, @FormParam("p_contrasena") String contrasena) {
+
+		Proveedor proveedor = new Proveedor();
+		proveedor.setId(id);
+		proveedor.setEmpresa(empresa);
+		proveedor.setRuc(ruc);
+		proveedor.setContacto(contacto);
+		proveedor.setDni(dni);
+		proveedor.setCorreo(correo);
+		proveedor.setDireccion(direccion);
+		proveedor.setDepartamento(departamento);
+		proveedor.setContrasena(contrasena);
+
+		try {
+			Connection cn = MysqlDBConn.getConnection();
+			PreparedStatement pst = cn.prepareStatement(
+					"UPDATE PROVEEDOR SET empresa=?,ruc=?,contacto=?,dni=?,correo=?,direccion=?,departamento_id=?,contrasena=? WHERE id=?");
+
+			pst.setString(1, proveedor.getEmpresa());
+			pst.setString(2, proveedor.getRuc());
+			pst.setString(3, proveedor.getContacto());
+			pst.setString(4, proveedor.getDni());
+			pst.setString(5, proveedor.getCorreo());
+			pst.setString(6, proveedor.getDireccion());
+			pst.setInt(7, proveedor.getDepartamento());
+			pst.setString(8, proveedor.getContrasena());
+			pst.setInt(9, proveedor.getId());
+
+			pst.executeUpdate();
+			cn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Path("/registrar")
 	public void registrarProveedor(@FormParam("p_empresa") String empresa, @FormParam("p_ruc") String ruc,
 			@FormParam("p_contacto") String contacto, @FormParam("p_dni") String dni,
