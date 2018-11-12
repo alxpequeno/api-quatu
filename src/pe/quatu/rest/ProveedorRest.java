@@ -6,7 +6,10 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -17,6 +20,44 @@ import pe.quatu.util.MysqlDBConn;
 
 @Path("/proveedor")
 public class ProveedorRest {
+
+	@POST
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+	@Path("/registrar")
+	public void registrarProveedor(@FormParam("p_empresa") String empresa, @FormParam("p_ruc") String ruc,
+			@FormParam("p_contacto") String contacto, @FormParam("p_dni") String dni,
+			@FormParam("p_correo") String correo, @FormParam("p_direccion") String direccion,
+			@FormParam("p_departamento") int departamento, @FormParam("p_contrasena") String contrasena) {
+
+		Proveedor proveedor = new Proveedor();
+		proveedor.setEmpresa(empresa);
+		proveedor.setRuc(ruc);
+		proveedor.setContacto(contacto);
+		proveedor.setDni(dni);
+		proveedor.setCorreo(correo);
+		proveedor.setDireccion(direccion);
+		proveedor.setDepartamento(departamento);
+		proveedor.setContrasena(contrasena);
+
+		try {
+			Connection cn = MysqlDBConn.getConnection();
+			PreparedStatement pst = cn.prepareStatement("insert into PROVEEDOR values (null,?,?,?,?,?,?,?,?)");
+
+			pst.setString(1, proveedor.getEmpresa());
+			pst.setString(2, proveedor.getRuc());
+			pst.setString(3, proveedor.getContacto());
+			pst.setString(4, proveedor.getDni());
+			pst.setString(5, proveedor.getCorreo());
+			pst.setString(6, proveedor.getDireccion());
+			pst.setInt(7, proveedor.getDepartamento());
+			pst.setString(8, proveedor.getContrasena());
+
+			pst.executeUpdate();
+			cn.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
