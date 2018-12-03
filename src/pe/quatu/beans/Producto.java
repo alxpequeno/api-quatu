@@ -14,6 +14,17 @@ public class Producto implements Serializable {
 	private String region;
 	private String resumen;
 	private int proveedor;
+	private String foto;
+	
+	
+
+	public String getFoto() {
+		return foto;
+	}
+
+	public void setFoto(String foto) {
+		this.foto = foto;
+	}
 
 	public int getCodigo() {
 		return codigo;

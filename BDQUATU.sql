@@ -37,6 +37,7 @@ create table PRODUCTO(
     region varchar(500) not null,
     resumen varchar(1000) not null,
     proveedor_id int not null,
+    foto varchar(500),
     
     foreign key (categoria_codigo) references CATEGORIA(codigo),
     foreign key (proveedor_id) references PROVEEDOR(id)
@@ -68,10 +69,12 @@ insert into DEPARTAMENTO values(null,"Tacna");
 insert into DEPARTAMENTO values(null,"Tumbes");
 insert into DEPARTAMENTO values(null,"Ucayali");
 
-insert into PROVEEDOR values (null,"Supermercados Peruanos","20396678903","Pedro Oyeda","45683634","pedrito@esgay.com","Av. El Golf calle 1 Mz23 Lote 3 Asentamiento Humano los Invasores de la Molina",1,"kawasaki");
-insert into PROVEEDOR values (null,"RIMAC Seguros","121323123","Pedro Oyeda","45683634","pedrito@esgay.com","Av. El Golf calle 1 Mz23 Lote 3 Asentamiento Humano los Invasores de la Molina",1,"kawasaki");
-
 insert into CATEGORIA values (null, "Aves y Carnes");
+insert into CATEGORIA values (null, "Frutas y Verduras");
+insert into CATEGORIA values (null, "Pescados y Mariscos");
 
 select * from PROVEEDOR;
 select * from CATEGORIA;
+select * from PRODUCTO;
+
+SELECT * FROM PRODUCTO WHERE nombre like concat('%',?,'%')
