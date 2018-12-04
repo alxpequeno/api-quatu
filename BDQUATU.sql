@@ -21,6 +21,8 @@ create table PROVEEDOR(
     foreign key (departamento_id) 		references DEPARTAMENTO (id)
 );
 
+
+
 create table CATEGORIA(
 	codigo int auto_increment primary key,
     descripcion varchar(100) not null
@@ -42,6 +44,7 @@ create table PRODUCTO(
     foreign key (categoria_codigo) references CATEGORIA(codigo),
     foreign key (proveedor_id) references PROVEEDOR(id)
 );
+
 
 insert into DEPARTAMENTO values(null,"Amazonas");
 insert into DEPARTAMENTO values(null,"Ancash");
@@ -73,8 +76,12 @@ insert into CATEGORIA values (null, "Aves y Carnes");
 insert into CATEGORIA values (null, "Frutas y Verduras");
 insert into CATEGORIA values (null, "Pescados y Mariscos");
 
+insert into PROVEEDOR values (null,"Villa Sur SAC","20376657839","Juan Perez","6789999","jperez@villa.com.pe","Av. la molina",1,"123");
+
+insert into PRODUCTO values (null,"Pollo Entero con Menudencia","Peso aprox 2.100 a 2.400 Kg (Foto referencial, los productos se venden frescos en su estado original).",5.9,7.9,"Kg",1,"Lima, Ica, Arequipa","En granja los Villa Sur nos dedicamos a la cría y venta de cerdos y Pollos de campo orgánicos criados a maiz sin agregado de aditivos de ningún tipo.Una carne totalmente natural y sabrosa. Consulte zonas de entrega.Ventas por mayor y menor",1,"https://wongfood.vteximg.com.br/arquivos/ids/219273-1000-1000/227460-01-6627.jpg?v=636602868107600000");
+
+
 select * from PROVEEDOR;
 select * from CATEGORIA;
 select * from PRODUCTO;
 
-SELECT * FROM PRODUCTO WHERE nombre like concat('%',?,'%')
